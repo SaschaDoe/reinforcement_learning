@@ -6,7 +6,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
-
+import os
 from scores.score_logger import ScoreLogger
 
 ENV_NAME = "CartPole-v1"
@@ -21,6 +21,7 @@ EXPLORATION_MAX = 1.0
 EXPLORATION_MIN = 0.01
 EXPLORATION_DECAY = 0.995
 NAME = "cartpole_DQN_ER"
+PATH = os.getcwd()
 
 class DQNSolver:
 
@@ -71,7 +72,7 @@ def cartpole():
     run = 0
     while True:
         run += 1
-        rec.path = '/home/saschbot/out' + str(run) + '.mp4'
+        rec.path = PATH + "/video/" + NAME + str(run) + '.mp4'
         state = env.reset()
         state = np.reshape(state, [1, observation_space])
         step = 0
